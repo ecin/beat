@@ -1,0 +1,4 @@
+To run tests:
+
+export GOPATH=`pwd`
+go test beat
