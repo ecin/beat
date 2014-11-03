@@ -59,20 +59,16 @@ func (client EchoNestClient) GetTrack(trackIds []string) []Track {
     params.Add("track_id", trackId)
   }
 
-  var endpoint = fmt.Sprintf("%s?%s", TRACK_PROFILE_ENDPOINT, params.Encode())
-  endpoint = fmt.Sprintf("%s?%s", SONG_PROFILE_ENDPOINT, params.Encode())
+  endpoint := fmt.Sprintf("%s?%s", SONG_PROFILE_ENDPOINT, params.Encode())
 
   println(params.Encode())
 
   // TODO: handle error codes
   response, _ := http.Get(endpoint)
   body, _ := ioutil.ReadAll(response.Body)
-  fmt.Printf("%s\n", body)
 
   var trackResponse TrackResponse
   json.Unmarshal(body, &trackResponse)
-
-  fmt.Printf("%v\n", trackResponse)
 
   return trackResponse.Response.Tracks
 }
